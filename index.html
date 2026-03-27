@@ -3,563 +3,523 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>出場申込フォーム｜2026 前期中部日本ダンス選手権（ソロダンス）</title>
+<title>2026 中部ダンスフェスティバル in 名古屋（ソロダンス）出場申込</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
   --primary: #1a237e;
-  --primary-mid: #283593;
   --primary-light: #3949ab;
-  --accent: #c62828;
-  --gold: #f5a623;
-  --gold-dark: #e0911a;
+  --gold: #c9a227;
+  --gold-light: #f0d060;
+  --accent: #b71c1c;
+  --bg: #f4f6fb;
   --card-bg: #fff;
-  --text: #2d2d2d;
-  --text-light: #666;
-  --border: #e0e0e0;
-  --success: #2e7d32;
+  --border: #dde3f0;
+  --text: #222;
+  --text-sub: #555;
+  --req: #c0392b;
+  --success: #2ecc71;
   --radius: 14px;
-  --shadow: 0 4px 18px rgba(26,35,126,0.10);
+  --shadow: 0 4px 24px rgba(26,35,126,0.10);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
-  background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 50%, #e8eaf6 100%);
-  min-height: 100vh; color: var(--text);
-}
+body { font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-/* ===== HEADER ===== */
+/* ── ヘッダー ── */
 header {
-  background: linear-gradient(135deg, #0d1b6e 0%, #1a237e 35%, #283593 65%, #1565c0 100%);
-  color: #fff; padding: 28px 20px 24px; text-align: center;
-  box-shadow: 0 4px 24px rgba(13,27,110,0.40);
-  position: relative; overflow: hidden;
-}
-header::before {
-  content:''; position:absolute; top:-50px; right:-50px;
-  width:220px; height:220px; background:rgba(255,255,255,0.05); border-radius:50%;
-}
-header::after {
-  content:''; position:absolute; bottom:-60px; left:-40px;
-  width:180px; height:180px; background:rgba(255,255,255,0.04); border-radius:50%;
+  background: linear-gradient(135deg, #0d1460 0%, #1a237e 50%, #283593 100%);
+  color: #fff; padding: 28px 20px 22px; text-align: center;
 }
 .header-badge {
-  display:inline-block; background:rgba(255,255,255,0.18);
-  border:1px solid rgba(255,255,255,0.4); border-radius:20px;
-  padding:4px 16px; font-size:11px; font-weight:700;
-  letter-spacing:0.05em; margin-bottom:10px;
+  display: inline-block; background: var(--gold); color: #1a237e;
+  font-size: 11px; font-weight: 800; padding: 3px 12px; border-radius: 20px; margin-bottom: 10px;
+  letter-spacing: 0.5px;
 }
+header h1 { font-size: clamp(18px,4vw,26px); font-weight: 900; margin-bottom: 4px; line-height: 1.3; }
+header h2 { font-size: clamp(13px,3vw,17px); font-weight: 600; opacity: 0.88; margin-bottom: 14px; }
 .header-solo-badge {
-  display:inline-block; background:rgba(245,166,35,0.25);
-  border:1.5px solid rgba(245,166,35,0.6); border-radius:20px;
-  padding:4px 18px; font-size:12px; font-weight:800; color:#ffe082;
-  letter-spacing:0.08em; margin-bottom:12px; margin-left:8px;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(201,162,39,0.2); border: 1.5px solid var(--gold);
+  color: var(--gold-light); font-size: 12px; font-weight: 700;
+  padding: 4px 14px; border-radius: 20px; margin-bottom: 14px;
 }
-header h1 { font-size:clamp(16px,4.2vw,24px); font-weight:900; letter-spacing:0.04em; line-height:1.4; margin-bottom:4px; }
-header h2 { font-size:clamp(12px,3vw,15px); font-weight:600; opacity:0.88; margin-bottom:14px; }
 .header-info {
-  display:flex; flex-wrap:wrap; justify-content:center; gap:10px 20px;
-  font-size:13px; font-weight:600;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 20px;
+  font-size: 13px; opacity: 0.92;
 }
-.header-info span { display:flex; align-items:center; gap:5px; }
-
-/* ===== CONTAINER ===== */
-.container { max-width:720px; margin:0 auto; padding:20px 14px 40px; }
-
-/* ===== STEP BAR ===== */
-.step-bar { display:flex; align-items:center; justify-content:center; gap:0; margin:18px 0 22px; }
-.step { display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:#bbb; }
-.step.active { color:var(--primary); }
-.step.done   { color:var(--success); }
-.step-num {
-  width:30px; height:30px; border-radius:50%; border:2.5px solid currentColor;
-  display:flex; align-items:center; justify-content:center;
-  font-size:13px; font-weight:900; background:#fff;
-}
-.step.active .step-num { background:var(--primary); color:#fff; border-color:var(--primary); }
-.step.done   .step-num { background:var(--success);  color:#fff; border-color:var(--success); }
-.step-line { flex:1; height:2px; background:#ddd; max-width:60px; }
-.step-line.done { background:var(--success); }
-
-/* ===== NOTICE ===== */
-.notice {
-  background:linear-gradient(135deg,#fff8e1,#fff3cd);
-  border:2px solid var(--gold); border-radius:var(--radius);
-  padding:14px 18px; margin-bottom:18px; font-size:13px; line-height:1.8;
-}
-.notice-title { font-size:14px; font-weight:800; color:var(--gold-dark); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
-
-/* ===== CARD ===== */
-.card {
-  background:var(--card-bg); border-radius:var(--radius);
-  box-shadow:var(--shadow); padding:22px 22px 18px;
-  margin-bottom:16px; border:1px solid rgba(26,35,126,0.08);
-}
-.card-title {
-  font-size:16px; font-weight:800; color:var(--primary);
-  margin-bottom:16px; display:flex; align-items:center; gap:8px;
-  border-bottom:2px solid #e8eaf6; padding-bottom:10px;
+.header-info span { display: flex; align-items: center; gap: 5px; }
+.header-deadline {
+  margin-top: 12px;
+  background: rgba(201,162,39,0.18); border: 1.5px solid var(--gold);
+  color: var(--gold-light); font-size: 13px; font-weight: 700;
+  padding: 6px 18px; border-radius: 8px; display: inline-block;
 }
 
-/* ===== SOLO PLAYER CARD ===== */
-.player-solo {
-  background:linear-gradient(135deg,#e8eaf6,#fff);
-  border-radius:10px; padding:16px 16px 12px;
-  border:1.5px solid #c5cae9;
-}
-.player-solo-title {
-  font-size:13px; font-weight:800; padding:5px 14px; border-radius:20px;
-  margin-bottom:14px; display:inline-flex; align-items:center; gap:7px; color:#fff;
-  background:linear-gradient(90deg,#1a237e,#3949ab);
-}
+/* ── コンテナ ── */
+.container { max-width: 720px; margin: 0 auto; padding: 24px 16px 60px; }
 
-/* ===== FORM ELEMENTS ===== */
-.form-group { margin-bottom:13px; }
-label { display:block; font-size:13px; font-weight:700; color:var(--primary); margin-bottom:5px; }
-.req {
-  display:inline-block; background:var(--accent); color:#fff;
-  font-size:10px; font-weight:700; padding:1px 6px; border-radius:4px;
-  margin-left:5px; vertical-align:middle;
+/* ── ステップバー ── */
+.step-bar { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 28px; }
+.step { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #aaa; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; border: 2.5px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; background: #fff; }
+.step.active { color: var(--primary); }
+.step.active .step-num { border-color: var(--primary); background: var(--primary); color: #fff; }
+.step.done { color: var(--success); }
+.step.done .step-num { border-color: var(--success); background: var(--success); color: #fff; }
+.step-line { width: 40px; height: 2px; background: #ddd; margin: 0 4px; }
+
+/* ── カード ── */
+.card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px 20px; margin-bottom: 18px; border: 1px solid var(--border); }
+.card-title { font-size: 15px; font-weight: 800; color: var(--primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+.card-title i { color: var(--gold); }
+
+/* ── フォームグループ ── */
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-sub); margin-bottom: 5px; }
+.form-group input, .form-group select {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 9px 12px; font-size: 14px; background: #fafbff;
+  transition: border-color 0.2s;
 }
-input[type="text"], input[type="email"], input[type="tel"], input[type="date"] {
-  width:100%; padding:11px 13px; border:2px solid var(--border);
-  border-radius:9px; font-size:14px; transition:border-color 0.2s,box-shadow 0.2s;
-  background:#fafafa; font-family:inherit;
-}
-input:focus { outline:none; border-color:var(--primary-light); box-shadow:0 0 0 3px rgba(57,73,171,0.12); background:#fff; }
-input.error { border-color:#e53935!important; background:#fff5f5; }
-.err-msg { color:#e53935; font-size:11px; margin-top:4px; display:none; }
-.err-msg.show { display:block; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); background: #fff; }
+.req { color: var(--req); font-size: 10px; font-weight: 800; margin-left: 5px; background: #fff0f0; padding: 1px 5px; border-radius: 4px; }
+.form-hint { font-size: 11px; color: #888; margin-top: 3px; }
 
-/* width helpers */
-.w-zip-input { max-width:33%; }
-.w-mobile    { max-width:33%; }
-.w-email     { max-width:40%; }
-.w-addr      { max-width:50%; }
-.w-name      { max-width:50%; }
-
-.form-row { display:flex; gap:12px; }
-.form-row > * { flex:1; }
-
-.zip-wrap { display:flex; gap:8px; align-items:flex-end; }
-.zip-wrap input { flex:1; max-width:130px; }
+/* ── 連絡先住所 ── */
+.form-row { display: flex; gap: 10px; }
+.form-row .form-group { flex: 1; }
+.zip-wrap { display: flex; align-items: flex-end; gap: 8px; }
+.zip-wrap input { flex: 1; }
 .btn-zip {
-  padding:11px 14px;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  color:#fff; border:none; border-radius:9px; font-size:13px; font-weight:700;
-  cursor:pointer; white-space:nowrap; transition:opacity 0.2s;
+  background: var(--primary); color: #fff; border: none; border-radius: 8px;
+  padding: 9px 14px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  display: flex; align-items: center; gap: 4px;
 }
-.btn-zip:hover { opacity:0.88; }
-.btn-zip:disabled { opacity:0.5; cursor:not-allowed; }
+.btn-zip:disabled { opacity: 0.5; cursor: not-allowed; }
+.w-zip-input { max-width: 33%; }
+.w-mobile    { max-width: 33%; }
+.w-email     { max-width: 60%; }
+.w-reg       { max-width: 50%; }
+.w-addr      { max-width: 50%; }
 
-/* ===== SECTION LABEL ===== */
+/* ── 申込方法ノーティス ── */
+.notice {
+  background: linear-gradient(90deg, #e8eaf6, #f3f4fc);
+  border-left: 4px solid var(--primary); border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 18px; font-size: 13px;
+}
+.notice strong { color: var(--primary); display: block; margin-bottom: 6px; font-size: 14px; }
+.notice p { margin: 3px 0; line-height: 1.6; }
+
+/* ── 注意事項 ── */
+.caution-card {
+  background: linear-gradient(90deg, #fff8e1, #fffde7);
+  border: 1.5px solid #f9a825; border-radius: 10px;
+  padding: 14px 16px; margin-bottom: 18px; font-size: 13px;
+}
+.caution-card .caution-title { font-weight: 800; color: #e65100; margin-bottom: 8px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.caution-card ul { padding-left: 18px; }
+.caution-card ul li { margin: 4px 0; line-height: 1.6; }
+.caution-card .caution-important { color: #c0392b; font-weight: 700; }
+
+/* ── ソロダンス選手情報 ── */
+.solo-player-card {
+  background: linear-gradient(135deg, #e8eaf6 0%, #f3f4fc 100%);
+  border-radius: 10px; padding: 16px 14px; margin-bottom: 6px;
+}
+.solo-player-title {
+  font-size: 13px; font-weight: 800; color: var(--primary);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+}
+
+/* ── 競技区分 ── */
 .section-label {
-  font-size:13px; font-weight:800; color:#fff;
-  padding:7px 14px; border-radius:8px; margin:14px 0 8px;
-  display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  font-size: 13px; font-weight: 800; color: #fff;
+  padding: 7px 14px; border-radius: 8px; margin: 14px 0 8px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
 }
-.section-label span { color:rgba(255,255,255,0.82); font-weight:500; font-size:11px; }
-.sl-navy { background:linear-gradient(90deg,#1a237e,#3949ab); }
+.section-label i { color: rgba(255,255,255,0.85); }
+.section-label span { color: rgba(255,255,255,0.82); font-size: 11px; font-weight: 500; }
+.sl-br { background: linear-gradient(90deg, #1a237e, #3949ab); }
 
-/* ===== COL HEADS ===== */
-.col-head { font-size:12px; font-weight:700; padding:5px 10px; margin-bottom:6px; border-radius:6px; }
-.col-br { background:linear-gradient(90deg,#c5cae9,#dde1f7); color:#1a237e; }
-.col-la { background:linear-gradient(90deg,#ffcdd2,#fde8ea); color:#b71c1c; }
+.event-col-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.event-grid { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 6px; }
+.col-head { font-size: 12px; font-weight: 700; padding: 5px 10px; margin-bottom: 6px; border-radius: 6px; }
+.col-br { background: linear-gradient(90deg, #c5cae9, #dde1f7); color: #1a237e; }
+.col-la { background: linear-gradient(90deg, #ffcdd2, #fde8ea); color: #b71c1c; }
 
-/* ===== EVENT ITEMS ===== */
-.event-col-wrap { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
-.event-grid { display:grid; grid-template-columns:1fr; gap:6px; margin-bottom:6px; }
 .event-item {
-  display:flex; align-items:flex-start; gap:10px;
-  padding:10px 12px; border:2px solid #c5cae9; border-radius:10px;
-  cursor:pointer; transition:all 0.2s; background:#fff;
+  border: 2px solid var(--border); border-radius: 10px; padding: 10px 12px;
+  cursor: pointer; display: flex; align-items: flex-start; gap: 10px;
+  background: #fafbff; transition: all 0.18s;
+  user-select: none;
 }
-.event-item:hover { border-color:var(--primary-light); background:#e8eaf6; }
-.event-item.checked {
-  border-color:var(--primary); background:linear-gradient(135deg,#e8eaf6,#fff);
-  box-shadow:0 2px 8px rgba(26,35,126,0.18);
-}
-.event-item input[type=checkbox] { margin-top:2px; accent-color:var(--primary); width:16px; height:16px; flex-shrink:0; }
-.event-no   { font-size:15px; font-weight:900; color:var(--gold); }
-.event-name { font-size:13px; font-weight:700; color:var(--text); margin-top:2px; }
-.event-sub  { font-size:11px; color:var(--text-light); margin-top:1px; }
-.event-price {
-  display:inline-flex; align-items:center; gap:3px;
-  background:linear-gradient(90deg,#e65100,#ef6c00); color:#fff;
-  font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; margin-top:4px;
-}
+.event-item:hover { border-color: var(--primary-light); background: #eef0fa; }
+.event-item.checked { border-color: var(--primary); background: linear-gradient(90deg, #e8eaf6, #eef0fb); box-shadow: 0 2px 8px rgba(26,35,126,0.13); }
+.event-item input[type=checkbox] { margin-top: 3px; accent-color: var(--primary); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+.event-no { font-size: 15px; font-weight: 900; color: var(--gold); }
+.event-name { font-size: 13px; font-weight: 700; color: var(--text); margin: 1px 0; }
+.event-sub { font-size: 12px; color: var(--text-sub); }
+.event-price { font-size: 11px; color: #2e7d32; font-weight: 700; margin-top: 3px; }
 
-/* ===== FEE BOX ===== */
-.fee-box {
-  background:linear-gradient(135deg,#1a237e,#3949ab);
-  border-radius:12px; padding:16px 20px;
-  display:flex; align-items:center; justify-content:space-between;
-  margin-top:14px; color:#fff;
+.total-box {
+  background: linear-gradient(90deg, #1a237e, #3949ab);
+  color: #fff; border-radius: 10px; padding: 14px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 14px;
 }
-.fee-label  { font-size:14px; font-weight:700; display:flex; align-items:center; gap:6px; }
-.fee-amount { font-size:30px; font-weight:900; letter-spacing:-0.02em; }
-.fee-unit   { font-size:14px; font-weight:700; margin-left:3px; }
+.total-box .total-label { font-size: 13px; font-weight: 700; opacity: 0.9; }
+.total-box .total-amount { font-size: 24px; font-weight: 900; color: var(--gold-light); }
 
-/* ===== CAUTION ===== */
-.caution {
-  background:#f8f9ff; border:1.5px solid #c5cae9;
-  border-radius:10px; padding:12px 16px; font-size:12px; line-height:1.8; color:#555;
+/* ── 振込情報 ── */
+.transfer-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.transfer-row .form-group { flex: 1 1 0; min-width: 140px; }
+
+/* ── 競技重複チェック警告 ── */
+.conflict-alert {
+  display: none; background: #ffebee; border: 2px solid #f44336;
+  color: #c62828; border-radius: 8px; padding: 10px 14px;
+  font-size: 13px; font-weight: 700; margin-top: 8px;
+  align-items: center; gap: 6px;
 }
-.caution ul { padding-left:16px; }
+.conflict-alert.show { display: flex; }
 
-/* ===== BUTTONS ===== */
-.btn-row { display:flex; gap:12px; justify-content:center; margin-top:20px; }
+/* ── ボタン ── */
+.btn-row { display: flex; justify-content: center; gap: 14px; margin-top: 20px; }
 .btn-primary {
-  padding:15px 40px; font-size:16px; font-weight:800;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  color:#fff; border:none; border-radius:50px; cursor:pointer;
-  box-shadow:0 4px 16px rgba(26,35,126,0.35);
-  transition:all 0.2s; letter-spacing:0.05em;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  color: #fff; border: none; border-radius: 10px;
+  padding: 14px 36px; font-size: 16px; font-weight: 800;
+  cursor: pointer; box-shadow: 0 4px 14px rgba(26,35,126,0.25); transition: opacity 0.2s;
+  display: flex; align-items: center; gap: 8px;
 }
-.btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(26,35,126,0.45); }
-.btn-secondary {
-  padding:15px 30px; font-size:15px; font-weight:700;
-  background:#fff; color:var(--primary); border:2px solid var(--primary);
-  border-radius:50px; cursor:pointer; transition:all 0.2s;
+.btn-primary:hover { opacity: 0.88; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-back {
+  background: #fff; color: var(--primary); border: 2px solid var(--primary);
+  border-radius: 10px; padding: 13px 28px; font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: background 0.2s;
 }
-.btn-secondary:hover { background:#e8eaf6; }
+.btn-back:hover { background: #eef0fb; }
 
-/* ===== CONFIRM VIEW ===== */
-.confirm-table { width:100%; border-collapse:collapse; font-size:14px; margin-bottom:16px; }
-.confirm-table th {
-  background:linear-gradient(90deg,#e8eaf6,#c5cae9); color:var(--primary);
-  font-weight:700; padding:10px 14px; text-align:left; width:35%;
-  border-bottom:1px solid #c5cae9; vertical-align:top;
-}
-.confirm-table td { padding:10px 14px; border-bottom:1px solid #f3f3f3; vertical-align:top; }
-.confirm-table tr:last-child th,
-.confirm-table tr:last-child td { border-bottom:none; }
-.event-tags { display:flex; flex-wrap:wrap; gap:6px; }
-.event-tag {
-  background:linear-gradient(135deg,#e8eaf6,#c5cae9);
-  border:1.5px solid #9fa8da; color:var(--primary);
-  border-radius:20px; padding:4px 12px; font-size:12px; font-weight:700;
-}
-.tag-no { color:var(--gold); font-weight:900; }
-.total-highlight { font-size:20px; font-weight:900; color:var(--primary); }
+/* ── 確認画面 ── */
+.confirm-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.confirm-table th { background: var(--bg); color: var(--text-sub); font-weight: 700; text-align: left; padding: 9px 12px; width: 38%; border-bottom: 1px solid var(--border); }
+.confirm-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); word-break: break-all; }
+.event-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.event-tag { background: linear-gradient(90deg, #1a237e, #3949ab); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+.tag-no { color: var(--gold-light); }
+.confirm-total { background: linear-gradient(90deg, #1a237e, #3949ab); color: #fff; border-radius: 10px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; margin: 14px 0; }
+.confirm-total .lbl { font-size: 13px; opacity: 0.9; }
+.confirm-total .amt { font-size: 22px; font-weight: 900; color: var(--gold-light); }
 
-/* ===== COMPLETE VIEW ===== */
-.complete-icon  { font-size:64px; text-align:center; margin:20px 0 10px; }
-.complete-title { font-size:22px; font-weight:900; text-align:center; color:var(--primary); margin-bottom:8px; }
-.complete-sub   { font-size:14px; text-align:center; color:#666; margin-bottom:20px; }
-.complete-info  {
-  background:linear-gradient(135deg,#fff8e1,#fff3cd);
-  border:2px solid var(--gold); border-radius:12px;
-  padding:16px 20px; font-size:13px; line-height:2;
-}
-.complete-info strong { color:var(--primary); }
+/* ── 完了画面 ── */
+.complete-box { text-align: center; padding: 30px 0 10px; }
+.complete-icon { font-size: 60px; color: var(--success); margin-bottom: 14px; }
+.complete-box h2 { font-size: 22px; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
+.complete-box p { font-size: 14px; color: var(--text-sub); margin-bottom: 18px; line-height: 1.7; }
+.complete-notice { background: var(--bg); border-radius: 10px; padding: 16px; text-align: left; font-size: 13px; line-height: 1.8; }
+.complete-notice strong { color: var(--primary); }
 
-/* ===== HIDDEN ===== */
-#confirmView, #completeView { display:none; }
-
-/* ===== LOADING ===== */
-.loading-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,0.5);
-  display:none; align-items:center; justify-content:center;
-  z-index:9999; flex-direction:column; gap:12px; color:#fff; font-size:16px; font-weight:700;
+/* ── レスポンシブ ── */
+@media (max-width: 640px) {
+  .event-col-wrap { grid-template-columns: 1fr; }
 }
-.loading-overlay.show { display:flex; }
-.spinner {
-  width:48px; height:48px;
-  border:5px solid rgba(255,255,255,0.3); border-top-color:#fff;
-  border-radius:50%; animation:spin 0.9s linear infinite;
-}
-@keyframes spin { to { transform:rotate(360deg); } }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width:640px) {
-  .event-col-wrap { grid-template-columns:1fr; }
-}
-@media (max-width:520px) {
-  .card { padding:16px 13px; }
-  .event-col-wrap { grid-template-columns:1fr; }
-  .header-info { flex-direction:column; gap:5px; }
-  .w-zip-input, .w-mobile, .w-email, .w-addr, .w-name { max-width:100%!important; }
-  .btn-row { flex-direction:column; }
-  .form-row { flex-direction:column; gap:0; }
-  .zip-wrap { flex-direction:column; align-items:flex-start; }
-  .zip-wrap input { max-width:100%; }
-  /* 振込情報カード：スマホでは縦並び */
-  .transfer-wrap > .form-group { width:100%!important; }
+@media (max-width: 520px) {
+  .card { padding: 16px 13px; }
+  .header-info { flex-direction: column; gap: 5px; }
+  .w-reg, .w-zip-input, .w-mobile, .w-email, .w-addr { max-width: 100% !important; }
+  .btn-row { flex-direction: column; }
+  .form-row { flex-direction: column; gap: 0; }
+  .zip-wrap { flex-direction: column; align-items: flex-start; }
+  .transfer-row .form-group { width: 100% !important; }
 }
 </style>
 </head>
 <body>
 
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="spinner"></div>
-  <div>送信中です。しばらくお待ちください…</div>
-</div>
-
 <header>
-  <div>
-    <span class="header-badge">JDC公認（公認No.202615）</span>
-    <span class="header-solo-badge"><i class="fas fa-person-walking"></i> ソロダンス</span>
-  </div>
+  <div class="header-badge">JDC公認 公認No.202615</div>
   <h1>2026 前期中部日本ダンス選手権</h1>
   <h2>併催：2026 中部ダンスフェスティバル in 名古屋（ソロダンス）</h2>
+  <div class="header-solo-badge"><i class="fas fa-user"></i> ソロダンス専用申込フォーム</div>
   <div class="header-info">
-    <span><i class="fas fa-calendar-alt"></i> 令和8年6月14日（日）10:00〜19:00</span>
+    <span><i class="fas fa-calendar-alt"></i> 令和8年6月14日（日）10時〜19時（予定）</span>
     <span><i class="fas fa-map-marker-alt"></i> 岡谷鋼機名古屋公会堂 4Fホール</span>
-    <span><i class="fas fa-exclamation-circle"></i> 申込締切：令和8年5月15日（金）必着</span>
   </div>
+  <div class="header-deadline"><i class="fas fa-exclamation-circle"></i> 申込締切：令和8年5月15日（金）必着</div>
 </header>
 
 <div class="container">
 
-  <!-- STEP BAR -->
-  <div class="step-bar">
-    <div class="step active" id="step1"><div class="step-num">1</div><span>入力</span></div>
-    <div class="step-line" id="line1"></div>
-    <div class="step" id="step2"><div class="step-num">2</div><span>確認</span></div>
-    <div class="step-line" id="line2"></div>
-    <div class="step" id="step3"><div class="step-num">3</div><span>完了</span></div>
+  <!-- ステップバー -->
+  <div class="step-bar" id="stepBar">
+    <div class="step active" id="step1"><div class="step-num">1</div> 入力</div>
+    <div class="step-line"></div>
+    <div class="step" id="step2"><div class="step-num">2</div> 確認</div>
+    <div class="step-line"></div>
+    <div class="step" id="step3"><div class="step-num">3</div> 完了</div>
   </div>
 
-  <!-- ===== FORM VIEW ===== -->
+  <!-- ── 入力画面 ── -->
   <div id="formView">
 
     <!-- 申込方法ノーティス -->
     <div class="notice">
-      <div class="notice-title"><i class="fas fa-info-circle"></i> 申込方法・振込口座</div>
-      <div>出場料を郵便振替にてお支払いの上、本フォームよりお申込みください。</div>
-      <div style="margin-top:6px;">
-        <strong>【振込先】</strong> 郵便振替口座　JDC中部総局 競技部<br>
-        口座番号：<strong>00830-5-88490</strong><br>
-        ゆうちょ銀行〇八九店（ゼロハチキュウ店）当座 0088490
-      </div>
-      <div style="margin-top:6px;color:#c62828;font-size:12px;">
-        <i class="fas fa-exclamation-triangle"></i>
-        通信欄に大会日（令和8年6月14日）・大会名（前期中部日本ダンス選手権 ソロダンス）を必ずご記入ください。
-      </div>
+      <strong><i class="fas fa-info-circle"></i> 申込方法について</strong>
+      <p>出場料を郵便振込後、このフォームに必要事項を入力してご送信ください。</p>
+      <p><b>振込口座：</b>郵便振替 JDC中部総局競技部　口座番号：<b>00830-5-88490</b></p>
+      <p>（郵便局以外）ゆうちょ銀行 〇八九店（当座）0088490</p>
+      <p>通信欄に「大会日・大会名」を必ず明記してください。</p>
     </div>
 
-    <!-- 選手情報カード -->
-    <div class="card">
-      <div class="card-title"><i class="fas fa-user"></i> 選手情報 <span style="font-size:12px;font-weight:600;color:#999;margin-left:auto;">男女ともに一人での参加</span></div>
-      <div class="player-solo">
-        <div class="player-solo-title"><i class="fas fa-star"></i> 出場選手</div>
+    <!-- 注意事項 -->
+    <div class="caution-card">
+      <div class="caution-title"><i class="fas fa-exclamation-triangle"></i> ソロダンス 注意事項</div>
+      <ul>
+        <li class="caution-important">ボールルームとラテンアメリカンの重複出場は不可です。（どちらか一方のみ選択可能）</li>
+        <li>他のカップル競技との重複出場は可能です。</li>
+        <li>参加資格：男女ともに一人での参加</li>
+        <li>服装：ボールルーム＝正装または平服、ラテンアメリカン＝自由</li>
+        <li>出場料：1区分 1,500円（お試し価格）</li>
+        <li>納入された出場料は原則として返金できません。</li>
+      </ul>
+    </div>
 
+    <!-- 選手情報（ソロ） -->
+    <div class="card">
+      <div class="card-title"><i class="fas fa-user"></i> 選手情報</div>
+      <div class="solo-player-card">
+        <div class="solo-player-title"><i class="fas fa-id-card"></i> 出場選手</div>
         <div class="form-group">
           <label>氏名（漢字）<span class="req">必須</span></label>
-          <input type="text" id="playerKanji" class="w-name" placeholder="例：山田 太郎">
-          <div class="err-msg" id="playerKanji-err">氏名（漢字）を入力してください</div>
+          <input type="text" id="nameKanji" placeholder="例：中部 花子" style="max-width:50%">
         </div>
         <div class="form-group">
           <label>氏名（ふりがな）<span class="req">必須</span></label>
-          <input type="text" id="playerKana" class="w-name" placeholder="例：やまだ たろう">
-          <div class="err-msg" id="playerKana-err">氏名（ふりがな）を入力してください</div>
+          <input type="text" id="nameKana" placeholder="例：ちゅうぶ はなこ" style="max-width:50%">
         </div>
         <div class="form-group">
           <label>所属教室名</label>
-          <input type="text" id="playerDojo" class="w-name" placeholder="例：〇〇ダンススタジオ">
+          <input type="text" id="dojo" placeholder="例：中部ダンス教室" style="max-width:50%">
+        </div>
+        <div class="form-group">
+          <label>性別<span class="req">必須</span></label>
+          <select id="gender" style="max-width:50%">
+            <option value="">選択してください</option>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+          </select>
         </div>
       </div>
     </div>
 
-    <!-- 連絡先カード -->
+    <!-- 連絡先 -->
     <div class="card">
       <div class="card-title"><i class="fas fa-address-card"></i> 連絡先</div>
-
       <div class="form-group">
         <label>連絡先氏名<span class="req">必須</span></label>
-        <input type="text" id="contactName" class="w-name" placeholder="例：山田 太郎">
-        <div class="err-msg" id="contactName-err">連絡先氏名を入力してください</div>
+        <input type="text" id="contactName" placeholder="例：中部 花子" style="max-width:50%">
       </div>
-
       <div class="form-group">
         <label>郵便番号<span class="req">必須</span></label>
         <div class="zip-wrap">
-          <input type="text" id="zip" class="w-zip-input" placeholder="例：4640858" maxlength="8" inputmode="numeric">
-          <button type="button" class="btn-zip" onclick="searchZip()">
-            <i class="fas fa-search"></i> 検索
-          </button>
+          <input type="text" id="zip" class="w-zip-input" placeholder="例：4640000" maxlength="8" inputmode="numeric">
+          <button class="btn-zip" onclick="searchZip()"><i class="fas fa-search"></i> 検索</button>
         </div>
-        <div class="err-msg" id="zip-err">郵便番号を入力してください</div>
       </div>
-
-      <div class="form-group">
-        <label>都道府県・市区町村<span class="req">必須</span></label>
-        <div class="form-row">
-          <input type="text" id="pref" placeholder="都道府県">
-          <input type="text" id="city" placeholder="市区町村・町域">
+      <div class="form-row">
+        <div class="form-group">
+          <label>都道府県<span class="req">必須</span></label>
+          <input type="text" id="pref" placeholder="例：愛知県">
         </div>
-        <div class="err-msg" id="pref-err">都道府県・市区町村を入力してください</div>
+        <div class="form-group">
+          <label>市区町村<span class="req">必須</span></label>
+          <input type="text" id="city" placeholder="例：名古屋市千種区">
+        </div>
       </div>
-
       <div class="form-group">
-        <label>番地・マンション名<span class="req">必須</span></label>
+        <label>番地・マンション名</label>
         <input type="text" id="addr" class="w-addr" placeholder="例：千種1-30-2 古井ノ坂ビル201">
-        <div class="err-msg" id="addr-err">番地を入力してください</div>
       </div>
-
       <div class="form-group">
         <label>携帯番号<span class="req">必須</span></label>
-        <input type="tel" id="mobile" class="w-mobile" placeholder="例：09012345678" inputmode="tel">
-        <div class="err-msg" id="mobile-err">携帯番号を入力してください</div>
+        <input type="tel" id="mobile" class="w-mobile" placeholder="例：09012345678" inputmode="numeric">
       </div>
-
       <div class="form-group">
         <label>メールアドレス<span class="req">必須</span></label>
-        <input type="email" id="email" class="w-email" placeholder="例：sample@example.com" inputmode="email">
-        <div class="err-msg" id="email-err">正しいメールアドレスを入力してください</div>
+        <input type="email" id="email" class="w-email" placeholder="例：hanako@example.com" inputmode="email">
       </div>
     </div>
 
-    <!-- 出場競技区分カード -->
+    <!-- 出場競技区分 -->
     <div class="card">
       <div class="card-title"><i class="fas fa-music"></i> 出場競技区分</div>
-      <div style="font-size:12px;color:#888;margin-bottom:10px;">
-        <i class="fas fa-info-circle"></i> 複数選択可。1区分 <strong style="color:var(--primary);">1,500円</strong>（お試し価格）
+
+      <!-- 重複警告 -->
+      <div class="conflict-alert" id="conflictAlert">
+        <i class="fas fa-ban"></i> ボールルームとラテンアメリカンの重複出場はできません。どちらか一方のみ選択してください。
       </div>
 
-      <div class="section-label sl-navy">
-        <i class="fas fa-user"></i> アマチュア ソロダンス
-        <span>男女ともに一人での参加　正装または平服・自由</span>
+      <div class="section-label sl-br">
+        <i class="fas fa-star"></i> アマチュア ソロダンス
+        <span>（ボールルームとラテンの重複出場不可）</span>
       </div>
+
       <div class="event-col-wrap">
         <div>
-          <div class="col-head col-br"><i class="fas fa-shoe-prints"></i> ボールルーム</div>
+          <div class="col-head col-br">ボールルーム</div>
           <div id="soloBREvents" class="event-grid"></div>
         </div>
         <div>
-          <div class="col-head col-la"><i class="fas fa-fire"></i> ラテンアメリカン</div>
+          <div class="col-head col-la">ラテンアメリカン</div>
           <div id="soloLAEvents" class="event-grid"></div>
         </div>
       </div>
 
-      <!-- 合計出場料 -->
-      <div class="fee-box">
-        <div class="fee-label"><i class="fas fa-yen-sign"></i> 合計出場料</div>
-        <div><span class="fee-amount" id="totalFee">0</span><span class="fee-unit">円</span></div>
+      <div class="total-box">
+        <span class="total-label"><i class="fas fa-yen-sign"></i> 合計出場料</span>
+        <span class="total-amount" id="totalAmt">¥0</span>
       </div>
     </div>
 
-    <!-- 振込情報カード -->
+    <!-- 振込情報 -->
     <div class="card">
-      <div class="card-title">
-        <i class="fas fa-university" style="color:var(--gold);"></i> 振込情報
-      </div>
-      <div class="transfer-wrap" style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
-        <div class="form-group" style="flex:0 0 auto;width:calc(50% - 5px);">
-          <label>振込日<span class="req">必須</span></label>
-          <input type="date" id="transferDate" style="width:100%;">
-          <div class="err-msg" id="transferDate-err">振込日を入力してください</div>
+      <div class="card-title"><i class="fas fa-university"></i> 振込情報</div>
+      <div class="transfer-row">
+        <div class="form-group">
+          <label><i class="fas fa-calendar-check"></i> 振込日<span class="req">必須</span></label>
+          <input type="date" id="transferDate" style="width:100%">
         </div>
-        <div class="form-group" style="flex:0 0 auto;width:calc(50% - 5px);">
-          <label>振込人名<span class="req">必須</span></label>
-          <input type="text" id="transferName" placeholder="例：ヤマダ タロウ" style="width:100%;">
-          <div class="err-msg" id="transferName-err">振込人名を入力してください</div>
+        <div class="form-group">
+          <label><i class="fas fa-user-edit"></i> 振込人名<span class="req">必須</span></label>
+          <input type="text" id="transferName" placeholder="例：チュウブ ハナコ" style="width:100%">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-coins"></i> 振込金額<span class="req">必須</span></label>
+          <input type="number" id="transferAmount" min="0" inputmode="numeric" placeholder="例：1500" style="width:100%">
+          <div class="form-hint">※ カンマ（,）なしで入力してください</div>
         </div>
       </div>
     </div>
 
-    <!-- 注意事項 -->
-    <div class="card">
-      <div class="card-title"><i class="fas fa-exclamation-triangle" style="color:#e53935;"></i> 注意事項</div>
-      <div class="caution">
-        <ul>
-          <li>ソロダンスは男女ともに一人での参加です。</li>
-          <li><strong>ソロダンスに限り、ボールルーム・ラテンセクションへの重複出場は不可とします。</strong>（他のカップル競技との重複出場は可）</li>
-          <li>服装：ボールルームは正装または平服、ラテンアメリカンは自由。</li>
-          <li>出場料は郵便振替にて事前にお支払いください。現金不可。</li>
-          <li>納入された出場料は原則として返金できません。</li>
-          <li>期限を過ぎてお申込みの方は、遅延事務手数料（2,000円）を徴収させていただく場合があります。</li>
-        </ul>
-      </div>
-    </div>
-
+    <!-- 確認ボタン -->
     <div class="btn-row">
-      <button type="button" class="btn-primary" onclick="goConfirm()">
-        <i class="fas fa-arrow-right"></i> 申込内容を確認する
+      <button class="btn-primary" onclick="goConfirm()">
+        <i class="fas fa-arrow-right"></i> 確認画面へ
       </button>
     </div>
 
   </div><!-- /formView -->
 
-  <!-- ===== CONFIRM VIEW ===== -->
-  <div id="confirmView">
+  <!-- ── 確認画面 ── -->
+  <div id="confirmView" style="display:none">
     <div class="card">
-      <div class="card-title"><i class="fas fa-clipboard-check"></i> 申込内容のご確認</div>
-      <div style="font-size:13px;color:#666;margin-bottom:14px;">以下の内容でお間違いなければ「申し込む」ボタンを押してください。</div>
+      <div class="card-title"><i class="fas fa-clipboard-check"></i> 申込内容の確認</div>
       <table class="confirm-table" id="confirmTable"></table>
     </div>
-    <div class="btn-row">
-      <button type="button" class="btn-secondary" onclick="goBack()"><i class="fas fa-arrow-left"></i> 戻る</button>
-      <button type="button" class="btn-primary" onclick="submitForm()"><i class="fas fa-paper-plane"></i> 申し込む</button>
-    </div>
-  </div>
-
-  <!-- ===== COMPLETE VIEW ===== -->
-  <div id="completeView">
-    <div class="card" style="text-align:center;padding:32px;">
-      <div class="complete-icon">🎉</div>
-      <div class="complete-title">お申込みが完了しました！</div>
-      <div class="complete-sub">確認メールをご登録のメールアドレスへお送りしました。<br>しばらくしても届かない場合は事務局までご連絡ください。</div>
-      <div class="complete-info">
-        <strong>【振込先】</strong><br>
-        郵便振替口座　JDC中部総局 競技部<br>
-        口座番号：<strong>00830-5-88490</strong><br>
-        ゆうちょ銀行〇八九店（ゼロハチキュウ店）当座 0088490<br><br>
-        <strong>【申込締切】</strong> 令和8年5月15日（金）必着<br><br>
-        <strong>【問い合わせ先】</strong><br>
-        JDC中部総局事務局（月・火・水 10:00〜16:00）<br>
-        〒464-0858 名古屋市千種区千種1-30-2 古井ノ坂ビル201<br>
-        TEL：052-745-2345 / FAX：052-745-2346
+    <div class="card">
+      <div class="card-title"><i class="fas fa-music"></i> 出場区分</div>
+      <div class="event-tags" id="confirmTags"></div>
+      <div class="confirm-total">
+        <span class="lbl">合計出場料</span>
+        <span class="amt" id="confirmTotal"></span>
       </div>
     </div>
-  </div>
+    <div class="btn-row">
+      <button class="btn-back" onclick="goBack()"><i class="fas fa-arrow-left"></i> 戻る</button>
+      <button class="btn-primary" id="submitBtn" onclick="submitForm()">
+        <i class="fas fa-paper-plane"></i> 申し込む
+      </button>
+    </div>
+  </div><!-- /confirmView -->
+
+  <!-- ── 完了画面 ── -->
+  <div id="completeView" style="display:none">
+    <div class="card">
+      <div class="complete-box">
+        <div class="complete-icon"><i class="fas fa-check-circle"></i></div>
+        <h2>申込を受け付けました！</h2>
+        <p>ご入力のメールアドレスに確認メールをお送りしました。<br>届かない場合は迷惑メールフォルダをご確認ください。</p>
+      </div>
+      <div class="complete-notice">
+        <strong>振込先（未振込の方）</strong><br>
+        郵便振替：JDC中部総局 競技部　口座番号：<b>00830-5-88490</b><br>
+        ゆうちょ銀行：〇八九店（ゼロハチキュウ店）当座 0088490<br><br>
+        <strong>申込締切：令和8年5月15日（金）必着</strong><br><br>
+        <strong>問い合わせ先：</strong>JDC中部総局事務局<br>
+        TEL：052-745-2345（月・火・水 10:00〜16:00）<br>
+        <a href="http://jdc-chubu.org/" target="_blank">http://jdc-chubu.org/</a>
+      </div>
+    </div>
+  </div><!-- /completeView -->
 
 </div><!-- /container -->
 
 <script>
-// ===== EmailJS初期化 =====
+// ── EmailJS初期化 ──
 emailjs.init("3A228NVyE5NVMxev8");
 
-// ===== 競技データ =====
+// ── 競技データ ──
 const FEE_SOLO = 1500;
 
-const soloData = {
-  br: [
-    { no: 27, name: 'ソロダンス ボールルーム', detail: 'W 単科', fee: FEE_SOLO },
-    { no: 29, name: 'ソロダンス ボールルーム', detail: 'T 単科', fee: FEE_SOLO }
-  ],
-  la: [
-    { no: 28, name: 'ソロダンス ラテンアメリカン', detail: 'R 単科', fee: FEE_SOLO },
-    { no: 30, name: 'ソロダンス ラテンアメリカン', detail: 'C 単科', fee: FEE_SOLO }
-  ]
-};
+const soloBRData = [
+  { no: 27, name: 'アマチュア ソロダンス', detail: 'W 単科', fee: FEE_SOLO },
+  { no: 29, name: 'アマチュア ソロダンス', detail: 'T 単科', fee: FEE_SOLO },
+];
+const soloLAData = [
+  { no: 28, name: 'アマチュア ソロダンス', detail: 'R 単科', fee: FEE_SOLO },
+  { no: 30, name: 'アマチュア ソロダンス', detail: 'C 単科', fee: FEE_SOLO },
+];
 
-const allEvents = [...soloData.br, ...soloData.la];
+const allEvents = [...soloBRData, ...soloLAData];
 
-// ===== buildEventItem =====
+// ── 重複送信防止 ──
+let isSending = false;
+
+// ── 選択中カテゴリー追跡 ──
+let hasBR = false;
+let hasLA = false;
+
+// ── イベントアイテム生成 ──
 function buildEventItem(ev) {
   const div = document.createElement('div');
   div.className = 'event-item';
+  div.dataset.no = ev.no;
+  div.dataset.cat = ev.no % 2 === 1 ? 'BR' : 'LA'; // 奇数=BR 偶数=LA
   div.innerHTML = `
-    <input type="checkbox" id="ev_${ev.no}" data-fee="${ev.fee}">
+    <input type="checkbox" id="ev${ev.no}" value="${ev.no}">
     <div style="flex:1">
       <div><span class="event-no">【No.${String(ev.no).padStart(2,'0')}】</span></div>
       <div class="event-name">${ev.name}</div>
       <div class="event-sub">${ev.detail}</div>
-      <span class="event-price"><i class="fas fa-yen-sign"></i> 1,500円</span>
+      <div class="event-price"><i class="fas fa-yen-sign"></i> ¥${ev.fee.toLocaleString()}</div>
     </div>`;
   div.addEventListener('click', e => {
     const cb = div.querySelector('input[type=checkbox]');
+    const cat = div.dataset.cat;
+
+    // 重複チェック：BRとLAは同時選択不可
+    if (!cb.checked) {
+      // チェックしようとしている
+      const opposite = cat === 'BR' ? 'LA' : 'BR';
+      const oppositeChecked = document.querySelectorAll(`.event-item[data-cat="${opposite}"] input:checked`).length > 0;
+      if (oppositeChecked) {
+        document.getElementById('conflictAlert').classList.add('show');
+        return; // チェック不可
+      }
+    }
+
     if (e.target !== cb) cb.checked = !cb.checked;
     div.classList.toggle('checked', cb.checked);
+    document.getElementById('conflictAlert').classList.remove('show');
     calcFee();
   });
   return div;
 }
 
-// ===== buildEvents =====
+// ── 競技描画 ──
 function buildEvents() {
   const render = (id, evs) => {
     const c = document.getElementById(id);
@@ -567,21 +527,24 @@ function buildEvents() {
     c.innerHTML = '';
     evs.forEach(ev => c.appendChild(buildEventItem(ev)));
   };
-  render('soloBREvents', soloData.br);
-  render('soloLAEvents', soloData.la);
+  render('soloBREvents', soloBRData);
+  render('soloLAEvents', soloLAData);
 }
 
-// ===== calcFee =====
+// ── 料金計算 ──
 function calcFee() {
-  let total = 0;
-  allEvents.forEach(ev => {
-    const cb = document.getElementById(`ev_${ev.no}`);
-    if (cb && cb.checked) total += ev.fee;
-  });
-  document.getElementById('totalFee').textContent = total.toLocaleString();
+  const total = getSelectedEvents().reduce((s, e) => s + e.fee, 0);
+  document.getElementById('totalAmt').textContent = '¥' + total.toLocaleString();
 }
 
-// ===== 郵便番号 JSONP =====
+function getSelectedEvents() {
+  return allEvents.filter(e => {
+    const cb = document.getElementById('ev' + e.no);
+    return cb && cb.checked;
+  });
+}
+
+// ── 郵便番号検索（zipcloud JSONP） ──
 function searchZip() {
   const raw = document.getElementById('zip').value
     .replace(/-/g,'')
@@ -616,119 +579,123 @@ function searchZip() {
   document.head.appendChild(script);
 }
 
-// ===== ヘルパー =====
-const gv = id => (document.getElementById(id)?.value || '').trim();
-function v(id, ok) {
-  const el  = document.getElementById(id);
-  const err = document.getElementById(id + '-err');
-  if (!el) return true;
-  el.classList.toggle('error', !ok);
-  if (err) err.classList.toggle('show', !ok);
-  return ok;
-}
+// ── ヘルパー ──
+const gv = id => document.getElementById(id)?.value.trim() || '';
 
-// ===== goConfirm =====
+// ── 確認画面へ ──
 function goConfirm() {
-  let ok = true;
-  if (!v('playerKanji', gv('playerKanji') !== '')) ok = false;
-  if (!v('playerKana',  gv('playerKana')  !== '')) ok = false;
-  if (!v('contactName', gv('contactName') !== '')) ok = false;
-  if (!v('zip',         gv('zip')         !== '')) ok = false;
-  if (!v('pref',        gv('pref') !== '' && gv('city') !== '')) ok = false;
-  if (!v('addr',        gv('addr')         !== '')) ok = false;
-  if (!v('mobile',      gv('mobile')       !== '')) ok = false;
-  if (!v('email',       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(gv('email')))) ok = false;
-  if (!v('transferDate',gv('transferDate') !== '')) ok = false;
-  if (!v('transferName',gv('transferName') !== '')) ok = false;
+  // バリデーション
+  if (!gv('nameKanji')) { alert('氏名（漢字）を入力してください。'); return; }
+  if (!gv('nameKana'))  { alert('氏名（ふりがな）を入力してください。'); return; }
+  if (!gv('gender'))    { alert('性別を選択してください。'); return; }
+  if (!gv('contactName')) { alert('連絡先氏名を入力してください。'); return; }
+  if (!gv('zip'))  { alert('郵便番号を入力してください。'); return; }
+  if (!gv('pref')) { alert('都道府県を入力してください。'); return; }
+  if (!gv('city')) { alert('市区町村を入力してください。'); return; }
+  if (!gv('mobile')) { alert('携帯番号を入力してください。'); return; }
+  const emailVal = gv('email');
+  if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) { alert('正しいメールアドレスを入力してください。'); return; }
 
-  const selected = allEvents.filter(ev => {
-    const cb = document.getElementById(`ev_${ev.no}`);
-    return cb && cb.checked;
+  const selected = getSelectedEvents();
+  if (selected.length === 0) { alert('出場競技区分を1つ以上選択してください。'); return; }
+
+  // 重複チェック
+  const hasBR = selected.some(e => e.no % 2 === 1);
+  const hasLA = selected.some(e => e.no % 2 === 0);
+  if (hasBR && hasLA) { alert('ボールルームとラテンアメリカンの重複出場はできません。'); return; }
+
+  if (!gv('transferDate'))   { alert('振込日を入力してください。'); return; }
+  if (!gv('transferName'))   { alert('振込人名を入力してください。'); return; }
+  if (!gv('transferAmount')) { alert('振込金額を入力してください。'); return; }
+
+  // 確認テーブル
+  const addrFull = gv('pref') + gv('city') + (gv('addr') ? ' ' + gv('addr') : '');
+  const rows = [
+    ['氏名',          `${gv('nameKanji')}（${gv('nameKana')}）`],
+    ['性別',          gv('gender')],
+    ['所属教室',      gv('dojo') || '（なし）'],
+    ['連絡先氏名',    gv('contactName')],
+    ['住所',          addrFull],
+    ['携帯番号',      gv('mobile')],
+    ['メールアドレス', emailVal],
+    ['振込日',        gv('transferDate')],
+    ['振込人名',      gv('transferName')],
+    ['振込金額',      `¥${parseInt(gv('transferAmount')||'0').toLocaleString()}`],
+  ];
+  let html = '';
+  rows.forEach(([th, td]) => {
+    html += `<tr><th>${th}</th><td>${td}</td></tr>`;
   });
-  if (selected.length === 0) {
-    alert('出場競技区分を1つ以上選択してください。');
-    ok = false;
-  }
+  document.getElementById('confirmTable').innerHTML = html;
 
-  if (!ok) {
-    const firstErr = document.querySelector('.error, .err-msg.show');
-    if (firstErr) firstErr.scrollIntoView({ behavior:'smooth', block:'center' });
-    return;
-  }
+  // タグ
+  let tagsHtml = '';
+  selected.forEach(e => {
+    tagsHtml += `<span class="event-tag"><span class="tag-no">【No.${String(e.no).padStart(2,'0')}】</span> ${e.name} ${e.detail}</span>`;
+  });
+  document.getElementById('confirmTags').innerHTML = tagsHtml;
 
-  buildConfirm(selected);
+  const total = selected.reduce((s, e) => s + e.fee, 0);
+  document.getElementById('confirmTotal').textContent = '¥' + total.toLocaleString();
+
+  // 画面切替
   document.getElementById('formView').style.display = 'none';
   document.getElementById('confirmView').style.display = 'block';
-  setStep(2);
-  window.scrollTo({ top:0, behavior:'smooth' });
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step1').classList.add('done');
+  document.getElementById('step2').classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-// ===== buildConfirm =====
-function buildConfirm(selectedEvents) {
-  const addrFull = gv('pref') + gv('city') + gv('addr');
-  const total = selectedEvents.reduce((s,e) => s + e.fee, 0);
-
-  let html = '';
-  const rows = [
-    ['選手氏名',       `${gv('playerKanji')}（${gv('playerKana')}）`],
-    ['所属教室',       gv('playerDojo') || '（なし）'],
-    ['連絡先氏名',     gv('contactName')],
-    ['住所',           addrFull],
-    ['携帯番号',       gv('mobile')],
-    ['メールアドレス', gv('email')],
-    ['振込日',         gv('transferDate')],
-    ['振込人名',       gv('transferName')],
-  ];
-  rows.forEach(([th,td]) => { html += `<tr><th>${th}</th><td>${td}</td></tr>`; });
-
-  html += `<tr><th>出場競技区分</th><td><div class="event-tags">`;
-  html += selectedEvents.map(e =>
-    `<span class="event-tag"><span class="tag-no">【No.${String(e.no).padStart(2,'0')}】</span> ${e.name} ${e.detail}</span>`
-  ).join('');
-  html += `</div></td></tr>`;
-  html += `<tr><th>合計出場料</th><td><span class="total-highlight">¥${total.toLocaleString()}</span></td></tr>`;
-
-  document.getElementById('confirmTable').innerHTML = html;
+// ── 戻る ──
+function goBack() {
+  document.getElementById('confirmView').style.display = 'none';
+  document.getElementById('formView').style.display = 'block';
+  document.getElementById('step1').classList.remove('done');
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step2').classList.remove('active');
+  window.scrollTo(0, 0);
 }
 
-// ===== submitForm =====
+// ── 送信 ──
 async function submitForm() {
-  const addrFull    = gv('pref') + gv('city') + gv('addr');
-  const emailVal    = gv('email');
-  const playerKanji = gv('playerKanji');
-  const playerKana  = gv('playerKana');
+  if (isSending) return;
+  isSending = true;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 送信中...';
 
-  const selectedEvents = allEvents.filter(ev => {
-    const cb = document.getElementById(`ev_${ev.no}`);
-    return cb && cb.checked;
-  });
-  const total = selectedEvents.reduce((s,e) => s + e.fee, 0);
+  const selected = getSelectedEvents();
+  const total = selected.reduce((s, e) => s + e.fee, 0);
+  const emailVal = gv('email');
+  const addrFull = gv('pref') + gv('city') + (gv('addr') ? ' ' + gv('addr') : '');
 
-  const eventsLine = selectedEvents
+  const eventsLine = selected
     .map(e => `【No.${String(e.no).padStart(2,'0')}】${e.name} ${e.detail}：¥${e.fee.toLocaleString()}`)
     .join('\n');
 
   const messageBody =
     `大会開催日：令和8年6月14日（日）\n` +
-    `選手氏名：${playerKanji}（${playerKana}）\n` +
-    `所属教室：${gv('playerDojo') || 'なし'}\n` +
+    `選手氏名：${gv('nameKanji')}（${gv('nameKana')}）\n` +
+    `性別：${gv('gender')}\n` +
+    `所属教室：${gv('dojo') || 'なし'}\n` +
     `連絡先：${gv('contactName')}　携帯：${gv('mobile')}\n` +
     `メールアドレス：${emailVal}\n` +
     `住所：${addrFull}\n` +
     `\n【出場区分】\n${eventsLine}\n` +
-    `\n合計：¥${total.toLocaleString()}\n` +
+    `\n合計出場料：¥${total.toLocaleString()}\n` +
     `振込日：${gv('transferDate')}\n` +
-    `振込人名：${gv('transferName')}`;
+    `振込人名：${gv('transferName')}\n` +
+    `振込金額：¥${parseInt(gv('transferAmount')||'0').toLocaleString()}`;
 
   const params = {
     to_email:   'jdc.chubu@gmail.com',
     cc_email:   emailVal,
     reply_to:   emailVal,
-    from_name:  playerKanji,
-    event_name: '2026 前期中部日本ダンス選手権（ソロダンス）',
-    reg_no:     `${playerKanji}（${playerKana}）`,
-    leader:     playerKanji + '（' + playerKana + '）',
-    partner:    gv('playerDojo') || 'なし',
+    from_name:  gv('nameKanji'),
+    event_name: '2026 中部ダンスフェスティバル in 名古屋（ソロダンス）',
+    leader:     `${gv('nameKanji')}（${gv('nameKana')}）`,
+    partner:    gv('gender'),
     phone:      gv('mobile'),
     email:      emailVal,
     address:    addrFull,
@@ -737,43 +704,23 @@ async function submitForm() {
     message:    messageBody,
   };
 
-  document.getElementById('loadingOverlay').classList.add('show');
   try {
     await emailjs.send('service_guqkzna', 'template_yjehnbv', params);
     document.getElementById('confirmView').style.display = 'none';
     document.getElementById('completeView').style.display = 'block';
-    setStep(3);
-    window.scrollTo({ top:0, behavior:'smooth' });
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step2').classList.add('done');
+    document.getElementById('step3').classList.add('active', 'done');
+    window.scrollTo(0, 0);
   } catch(err) {
-    console.error('EmailJS error:', err);
-    alert('送信に失敗しました。時間をおいて再度お試しいただくか、事務局へご連絡ください。\nTEL：052-745-2345');
-  } finally {
-    document.getElementById('loadingOverlay').classList.remove('show');
+    alert('送信に失敗しました。時間をおいて再度お試しください。\n' + err.text);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> 申し込む';
+    isSending = false;
   }
 }
 
-// ===== goBack =====
-function goBack() {
-  document.getElementById('confirmView').style.display = 'none';
-  document.getElementById('formView').style.display = 'block';
-  setStep(1);
-  window.scrollTo({ top:0, behavior:'smooth' });
-}
-
-// ===== setStep =====
-function setStep(n) {
-  [1,2,3].forEach(i => {
-    const s = document.getElementById('step'+i);
-    s.classList.remove('active','done');
-    if (i < n) s.classList.add('done');
-    else if (i === n) s.classList.add('active');
-  });
-  [1,2].forEach(i => {
-    document.getElementById('line'+i).classList.toggle('done', i < n);
-  });
-}
-
-// ===== 初期化 =====
+// ── 初期化 ──
 buildEvents();
 </script>
 </body>
